@@ -1,5 +1,7 @@
 'use strict';
 
+const Queue = require('./queue');
+
 const cats = [
   {
     imageURL:
@@ -71,6 +73,20 @@ const dogs = [
   }
 ];
 
+
+const Cats = new Queue();
+Cats.enqueue(cats[0]);
+Cats.enqueue(cats[1]);
+Cats.enqueue(cats[2]);
+console.log(Cats.peek());
+
+const Dogs = new Queue();
+Dogs.enqueue(dogs[0]);
+Dogs.enqueue(dogs[1]);
+Dogs.enqueue(dogs[2]);
+
+
+
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -94,22 +110,26 @@ app.use(
 );
 
 app.get('/api/cat', (req, res, next) => {
-  res.json(cats[0]);
+  //peek, so it doesnt modify queue
+  res.json(Cats.peek());
 });
 
 app.delete('/api/cat', (req, res, next) => {
-  cats.shift();
-  console.log(cats);
+  //dequeue so it modifies the queue
+  const cat = Cats.dequeue();
+  Cats.enqueue(cat);
+  // cats.shift();
+  // console.log(cats);
   res.sendStatus(204);
 });
 
 app.get('/api/dog', (req, res, next) => {
-  res.json(dogs[0]);
+  res.json(Dogs.peek());
 });
 
 app.delete('/api/dog', (req, res, next) => {
-  dogs.shift();
-  console.log(dogs);
+  const dog = Dogs.dequeue();
+  Dogs.enqueue(dog);
   res.sendStatus(204);
 });
 
