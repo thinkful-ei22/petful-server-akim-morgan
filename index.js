@@ -1,45 +1,89 @@
-"use strict";
+'use strict';
 
 const cats = [
   {
     imageURL:
-      "https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg",
+      'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg',
     imageDescription:
-      "Orange bengal cat with black stripes lounging on concrete.",
-    name: "Fluffy",
-    sex: "Female",
+      'Orange bengal cat with black stripes lounging on concrete.',
+    name: 'Fluffy1',
+    sex: 'Female',
     age: 2,
-    breed: "Bengal",
-    story: "Thrown on the street"
+    breed: 'Bengal',
+    story: 'Thrown on the street'
+  },
+  {
+    imageURL:
+      'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg',
+    imageDescription:
+      'Orange bengal cat with black stripes lounging on concrete.',
+    name: 'Fluffy2',
+    sex: 'Female',
+    age: 2,
+    breed: 'Bengal',
+    story: 'Thrown on the street'
+  },
+  {
+    imageURL:
+      'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg',
+    imageDescription:
+      'Orange bengal cat with black stripes lounging on concrete.',
+    name: 'Fluffy3',
+    sex: 'Female',
+    age: 2,
+    breed: 'Bengal',
+    story: 'Thrown on the street'
   }
 ];
 const dogs = [
   {
     imageURL:
-      "http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg",
+      'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
     imageDescription:
-      "A smiling golden-brown golden retreiver listening to music.",
-    name: "Zeus",
-    sex: "Male",
+      'A smiling golden-brown golden retreiver listening to music.',
+    name: 'Zeus1',
+    sex: 'Male',
     age: 3,
-    breed: "Golden Retriever",
-    story: "Owner Passed away"
+    breed: 'Golden Retriever',
+    story: 'Owner Passed away'
+  },
+  {
+    imageURL:
+      'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
+    imageDescription:
+      'A smiling golden-brown golden retreiver listening to music.',
+    name: 'Zeus2',
+    sex: 'Male',
+    age: 3,
+    breed: 'Golden Retriever',
+    story: 'Owner Passed away'
+  },
+  {
+    imageURL:
+      'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
+    imageDescription:
+      'A smiling golden-brown golden retreiver listening to music.',
+    name: 'Zeus3',
+    sex: 'Male',
+    age: 3,
+    breed: 'Golden Retriever',
+    story: 'Owner Passed away'
   }
 ];
 
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
 
-const { PORT, CLIENT_ORIGIN } = require("./config");
-const { dbConnect } = require("./db-mongoose");
+const { PORT, CLIENT_ORIGIN } = require('./config');
+const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
 
 const app = express();
 
 app.use(
-  morgan(process.env.NODE_ENV === "production" ? "common" : "dev", {
-    skip: (req, res) => process.env.NODE_ENV === "test"
+  morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
+    skip: (req, res) => process.env.NODE_ENV === 'test'
   })
 );
 
@@ -49,21 +93,21 @@ app.use(
   })
 );
 
-app.get("/api/cat", (req, res, next) => {
+app.get('/api/cat', (req, res, next) => {
   res.json(cats[0]);
 });
 
-app.delete("/api/cat", (req, res, next) => {
+app.delete('/api/cat', (req, res, next) => {
   cats.shift();
   console.log(cats);
   res.sendStatus(204);
 });
 
-app.get("/api/dog", (req, res, next) => {
+app.get('/api/dog', (req, res, next) => {
   res.json(dogs[0]);
 });
 
-app.delete("/api/dog", (req, res, next) => {
+app.delete('/api/dog', (req, res, next) => {
   dogs.shift();
   console.log(dogs);
   res.sendStatus(204);
@@ -74,8 +118,8 @@ function runServer(port = PORT) {
     .listen(port, () => {
       console.info(`App listening on port ${server.address().port}`);
     })
-    .on("error", err => {
-      console.error("Express failed to start");
+    .on('error', err => {
+      console.error('Express failed to start');
       console.error(err);
     });
 }
